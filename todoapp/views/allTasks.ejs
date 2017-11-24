@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Hello, world!</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Google Fonts -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Catamaran|Quicksand|Play" rel="stylesheet"> -->
+    <!-- Bootstrap CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    
+  </head>
+  <body>
+
+    <!-- content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 lmnu">
+            <a href="/"><h1 class="logo"><img src="/images/todo-app-icon.png" /> ToDoApp</h1></a>
+            <div class="list-group">
+                <a href="/tasks" class="list-group-item active">
+                    <i class="fa fa-tasks" aria-hidden="true"></i> All to do Tasks
+                </a>
+                <a href="#" class="list-group-item">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i> Today
+                </a>
+                <a href="#" class="list-group-item">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="intoDate">+1</span>Tomorrow
+                </a>
+                <a href="#" class="list-group-item">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i>  <span class="intoDate">+7</span>Next Week
+                </a>
+                <a href="#" class="list-group-item">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i>  Custom Date
+                </a>
+            </div>
+            </div>
+            <div class="col-md-9">
+                <h3><i class="fa fa-tasks" aria-hidden="true"></i> Tasks</h3>
+                <a href="/task/add" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add Task<span class="sr-only">(current)</span></a><br/><br/>
+                <div id="tasks">
+                    <% for(let i=0; i<tasks.length; i++) { %>
+                    <div class="task">
+                        <h4><%= tasks[i].title %></h4>
+                        <p class="label label-default">Oct 23rd '17 23:30</p> &nbsp; - &nbsp; <p class="label label-default"><%= tasks[i].fromDate %></p>
+                        <hr/>
+                        <!-- <div class="btn-group" role="group" aria-label="..."> -->
+                            <a href="/task/1" class="btn btn-primary"><i class="glyphicon glyphicon-search" ></i> View</a>
+                            <a href="/task/edit/1" class="btn btn-warning"><i class="glyphicon glyphicon-edit" ></i> Edit</a>
+                            <a href="/task/delete/1" class="btn btn-danger tdelete" ><i class="glyphicon glyphicon-trash" ></i> Trash</a>
+                        <!-- </div> -->
+                    <% } %>
+                    </div>
+                    <div class="task">
+                        <h4>Task2</h4>
+                        <p class="label label-default">Oct 23rd '17 23:30</p> &nbsp; - &nbsp; <p class="label label-default">Oct 23rd '17 23:30</p>
+                        <hr/>
+                        <!-- <div class="btn-group" role="group" aria-label="..."> -->
+                            <a href="/task/2" class="btn btn-primary"><i class="glyphicon glyphicon-search" ></i> View</a>
+                            <a href="/task/edit/2" class="btn btn-warning"><i class="glyphicon glyphicon-edit" ></i> Edit</a>
+                            <a href="/task/delete/2" class="btn btn-danger tdelete" ><i class="glyphicon glyphicon-trash" ></i> Trash</a>
+                        <!-- </div> -->
+                    </div>
+                    <div class="task">
+                        <h4>Task3</h4>
+                        <p class="label label-default">Oct 23rd '17 23:30</p> &nbsp; - &nbsp; <p class="label label-default">Oct 23rd '17 23:30</p>
+                        <hr/>
+                        <!-- <div class="btn-group" role="group" aria-label="..."> -->
+                            <a href="/task/2" class="btn btn-primary"><i class="glyphicon glyphicon-search" ></i> View</a>
+                            <a href="/task/edit/2" class="btn btn-warning"><i class="glyphicon glyphicon-edit" ></i> Edit</a>
+                            <a href="/task/delete/2" class="btn btn-danger tdelete" ><i class="glyphicon glyphicon-trash" ></i> Trash</a>
+                        <!-- </div> -->
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js" ></script>
+
+    <script>
+    $(".tdelete").click(function(evt){
+        evt.preventDefault();
+        console.log(evt);
+        bootbox.confirm("Are you sure to delete task", function(result){
+            console.log(result+evt.currentTarget.href);
+            if(result){
+                $.ajax({
+                        url: evt.currentTarget.href,
+                        method: "POST",
+                    }).done(function(res){
+                            console.log(res);
+                            if(res.success){
+                                location.reload();
+                            }else{
+                                bootbox.alert("Not able to delete the task");
+                                console.log(res.data);
+                            }
+                    });
+            }
+        });
+    });
+
+
+    //for fixed side navigation
+    var header = document.querySelector('.lmnu');
+    var origOffsetY = header.offsetTop;
+
+    function onScroll(e) {
+    window.scrollY >= origOffsetY ? header.classList.add('sticky') :
+                                    header.classList.remove('sticky');
+    }
+
+    document.addEventListener('scroll', onScroll);
+
+    </script>
+  </body>
+</html>

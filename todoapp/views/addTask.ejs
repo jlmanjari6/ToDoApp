@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Hello, world!</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+  </head>
+  <body>
+
+    <!-- Image and text -->
+    <!-- content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 lmnu">
+            <a href="/"><h1 class="logo"><img src="/images/todo-app-icon.png" /> ToDoApp</h1></a>
+            <div class="list-group">
+                <a href="/tasks" class="list-group-item active">
+                    <i class="fa fa-tasks" aria-hidden="true"></i> All To doTasks
+                </a>
+                <a href="#" class="list-group-item">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i> Today
+                </a>
+                <a href="#" class="list-group-item">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="intoDate">+1</span>Tomorrow
+                </a>
+                <a href="#" class="list-group-item">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i>  <span class="intoDate">+7</span>Next Week
+                </a>
+                <a href="#" class="list-group-item">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i>  Custom Date
+                </a>
+            </div>
+            </div>
+            <div class="col-md-9">
+        
+        <div class="row" id="wbck">
+
+        <form class="col-md-8" action="/task/add" method="POST">
+        <h1>Add Task</h1>
+            <div class="form-group">
+                <label for="TaskTitle">Title</label>
+                <input type="text" class="form-control" name="title" id="TaskTitle" placeholder="task title">
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="TaskDate">From Date<span class="text-muted">(mm/dd/yyyy hh:mm AM/PM)</span> </label>
+                        <input type="datetime-local" name="fdate" class="form-control" id="TaskFDate" >
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="TaskDate">To Date <span class="text-muted">(mm/dd/yyyy hh:mm AM/PM)</span> </label>
+                        <input type="datetime-local" name="tdate" class="form-control" id="TaskTDate" >
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="TaskNotes">Notes</label>
+                <textarea type="text" name="notes" class="form-control" id="TaskNotes" ></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+</div>
+        </div>
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+    <script>
+        $("#TaskFDate").val(moment().format('YYYY-MM-DDTHH:mm'));
+        $("#TaskTDate").val(moment().add(1,"hour").format('YYYY-MM-DDTHH:mm'));
+    </script>
+  </body>
+</html>
